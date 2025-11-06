@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login Page</title>
+  <style>
+    :root { --bg: #f4f7fb; --card: #ffffff; --accent: #2563eb; --muted: #6b7280; --error: #dc2626; --success: #16a34a; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background: linear-gradient(180deg, #eef2ff 0%, var(--bg) 100%); color: #111827; height: 100vh; display: grid; place-items: center; }
+    .container { width: 100%; max-width: 420px; padding: 24px; }
+    .card { background: var(--card); border-radius: 12px; padding: 28px; box-shadow: 0 6px 22px rgba(16,24,40,0.08); }
+    h1 { margin: 0 0 16px 0; font-size: 20px; }
+    .field { margin-bottom: 14px; }
+    label { display: block; font-size: 13px; margin-bottom: 6px; color: var(--muted); }
+    input[type="text"], input[type="password"] { width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid #e6e9ef; font-size: 14px; }
+    .actions { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
+    button { background: var(--accent); color: white; border: none; padding: 10px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; }
+    button:active { transform: translateY(1px); }
+    a { color: var(--accent); text-decoration: none; font-size: 13px; }
+    a:hover { text-decoration: underline; }
+    #message { margin-top: 12px; font-size: 13px; }
+    .error { color: var(--error); }
+    .success { color: var(--success); }
+    .hint { font-size: 12px; color: var(--muted); margin-top: 8px; }
+    @media (max-width: 420px) { .card { padding: 18px; } }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="card" aria-labelledby="login-title">
+      <h1 id="login-title">Sign in to your account</h1>
+      <form id="loginForm" novalidate>
+        <div class="field">
+          <label for="username">User name</label>
+          <input id="username" name="username" type="text" autocomplete="username" placeholder="Enter user name" required />
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter password" required />
+        </div>
+
+        <div class="actions">
+          <button id="loginBtn" type="submit">Login</button>
+          <a href="#" id="forgotLink">Forgot password?</a>
+        </div>
+
+        <p id="message" role="status" aria-live="polite"></p>
+        <p class="hint">Demo credentials: <strong>admin</strong> / <strong>password</strong></p>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    // Basic client-side validation + demo authentication
+    const form = document.getElementById('loginForm');
+    const msg = document.getElementById('message');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      msg.textContent = '';
+      msg.className = '';
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+
+      if (!username) {
+        msg.textContent = 'Please enter your user name.';
+        msg.className = 'error';
+        document.getElementById('username').focus();
+        return;
+      }
+
+      if (!password) {
+        msg.textContent = 'Please enter your password.';
+        msg.className = 'error';
+        document.getElementById('password').focus();
+        return;
+      }
+
+      // Demo: simulate server call
+      msg.textContent = 'Logging in...';
+      msg.className = '';
+
+      setTimeout(() => {
+        if ((username === 'admin' || username === 'testing') && (password === 'password'|| password === 'testingPassword')) {
+          msg.textContent = 'Login successful.';
+          msg.className = 'success';
+          setTimeout(() => {
+            window.location.href = 'page1.html';
+          }, 800);
+        } else {
+          msg.textContent = 'Invalid user name or password.';
+          msg.className = 'error';
+        }
+      }, 700);
+    });
+
+    document.getElementById('forgotLink').addEventListener('click', function (e) {
+      e.preventDefault();
+      // Replace with your recovery flow
+      alert('Forgot password clicked — implement recovery flow here.');
+    });
+  </script>
+</body>
+</html>
