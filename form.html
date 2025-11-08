@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Form - Demo App</title>
+  <title>Form - GUI</title>
   <style>
     :root{--bg:#f8fafc;--card:#fff;--accent:#2563eb;--muted:#6b7280}
     *{box-sizing:border-box}
@@ -18,7 +18,14 @@
     main{padding:28px}
     .card{background:var(--card);padding:20px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.06)}
     .field{margin-bottom:12px}
-    input,textarea{width:100%;padding:10px;border:1px solid #e6e9ef;border-radius:8px}
+    input,textarea,select{width:100%;padding:10px;border:1px solid #e6e9ef;border-radius:8px}
+    /* two-column row for related fields (responsive) */
+    .row{display:flex;gap:12px}
+    .row .field{margin-bottom:0}
+    @media (max-width:640px){
+      .row{flex-direction:column}
+      .row .field{margin-bottom:12px}
+    }
   </style>
 </head>
 <body>
@@ -37,17 +44,118 @@
 
   <main class="container">
     <section class="card">
-      <h1>Sample Form</h1>
-      <p>Fill and submit this simple demo form.</p>
+      <h1>FORM</h1>
+      <p>Fill and submit demo form.</p>
       <form id="demoForm">
-        <div class="field">
-          <label for="name">Name</label>
-          <input id="name" name="name" type="text" required />
-        </div>
-        <div class="field">
-          <label for="message">Message</label>
-          <textarea id="messageField" name="message" rows="4"></textarea>
-        </div>
+        <!-- Section 1: Personal Data -->
+        <fieldset style="margin-bottom:14px;border:1px solid #e6e9ef;padding:12px;border-radius:8px">
+          <legend style="padding:0 6px;color:var(--muted);font-weight:600">Personal Information</legend>
+          <div class="row">
+            <div class="field" style="flex:1">
+              <label for="firstName">First Name</label>
+              <input id="firstName" name="firstName" type="text" required />
+            </div>
+            <div class="field" style="flex:1">
+              <label for="lastName">Last Name</label>
+              <input id="lastName" name="lastName" type="text" required />
+            </div>
+          </div>
+          <div class="row">
+            <div class="field" style="flex:1">
+              <label for="gender">Gender</label>
+              <select id="gender" name="gender" required>
+                <option value="">Select gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="metali">Metali ill</option>
+              </select>
+            </div>
+            <div class="field" style="flex:1">
+              <label for="dob">Date of birth</label>
+              <input id="dob" name="dob" type="date" required />
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Section 2: Contact (placeholder) -->
+        <fieldset style="margin-bottom:14px;border:1px solid #e6e9ef;padding:12px;border-radius:8px">
+          <legend style="padding:0 6px;color:var(--muted);font-weight:600">Contact Information</legend>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" />
+          </div>
+          <div class="field">
+            <label for="phone">Phone</label>
+            <div class="row" style="gap:8px">
+              <div style="width:120px">
+                <select id="countryCode" name="countryCode" style="padding-right:8px">
+                  <option value="+91">🇮🇳 +91</option>
+                  <option value="+1">🇺🇸 +1</option>
+                  <option value="+44">🇬🇧 +44</option>
+                  <option value="+61">🇦🇺 +61</option>
+                  <option value="+81">🇯🇵 +81</option>
+                  <option value="+86">🇨🇳 +86</option>
+                  <option value="+49">🇩🇪 +49</option>
+                  <option value="+33">🇫🇷 +33</option>
+                  <option value="+7">🇷🇺 +7</option>
+                  <option value="+971">🇦🇪 +971</option>
+                  <option value="+65">🇸🇬 +65</option>
+                  <option value="+82">🇰🇷 +82</option>
+                </select>
+              </div>
+              <div style="flex:1">
+                <input id="phone" name="phone" type="tel" placeholder="Enter phone number" />
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Section 3: Education Details -->
+        <fieldset style="margin-bottom:14px;border:1px solid #e6e9ef;padding:12px;border-radius:8px">
+          <legend style="padding:0 6px;color:var(--muted);font-weight:600">Education Details</legend>
+          <div class="field">
+            <label for="collegeName">College Name</label>
+            <input id="collegeName" name="collegeName" type="text" required />
+          </div>
+          <div class="row">
+            <div class="field" style="flex:1">
+              <label for="degreeType">Type of Degree</label>
+              <select id="degreeType" name="degreeType" required onchange="updateStreamOptions()">
+                <option value="">Select degree type</option>
+                <option value="engineering">Engineering</option>
+                <option value="doctor">Doctor</option>
+                <option value="llb">LLB</option>
+                <option value="degree">Degree</option>
+              </select>
+            </div>
+            <div class="field" style="flex:1">
+              <label for="stream">Stream</label>
+              <select id="stream" name="stream" required>
+                <option value="">Select stream</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field" style="flex:1">
+              <label for="yearOfCompletion">Year of Completion</label>
+              <input id="yearOfCompletion" name="yearOfCompletion" type="month" required />
+            </div>
+            <div class="field" style="flex:1">
+              <label for="collegeLocation">Location of the college</label>
+              <input id="collegeLocation" name="collegeLocation" type="text" placeholder="City, State" required />
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Section 4: Additional / Message -->
+        <fieldset style="margin-bottom:10px;border:1px solid #e6e9ef;padding:12px;border-radius:8px">
+          <legend style="padding:0 6px;color:var(--muted);font-weight:600">Additional Message</legend>
+          <div class="field">
+            <label for="messageField">Message</label>
+            <textarea id="messageField" name="message" rows="4" placeholder="Optional message"></textarea>
+          </div>
+        </fieldset>
+
         <div class="field">
           <button type="submit" id="submitBtn">Send</button>
         </div>
@@ -79,13 +187,75 @@
       window.location.href = 'index.html';
     });
 
+    // Dynamic stream options based on degree type
+    function updateStreamOptions() {
+      const degreeType = document.getElementById('degreeType').value;
+      const streamSelect = document.getElementById('stream');
+      streamSelect.innerHTML = '<option value="">Select stream</option>';
+      
+      const streamOptions = {
+        engineering: [
+          'Electrical and Electronics',
+          'Mechanical',
+          'Civil',
+          'Useless'
+        ],
+        doctor: [
+          'MBBS',
+          'MD',
+          'Dental'
+        ],
+        llb: [
+          'Corporate Law',
+          'Criminal Law',
+          'Civil Law'
+        ],
+        degree: [
+          'Bachelor of Arts',
+          'Bachelor of Science',
+          'Bachelor of Commerce'
+        ]
+      };
+
+      if (degreeType && streamOptions[degreeType]) {
+        streamOptions[degreeType].forEach(stream => {
+          const option = document.createElement('option');
+          option.value = stream.toLowerCase().replace(/\s+/g, '-');
+          option.textContent = stream;
+          streamSelect.appendChild(option);
+        });
+      }
+    }
+
     document.getElementById('demoForm').addEventListener('submit', function(e){
       e.preventDefault();
-      const name = document.getElementById('name').value.trim();
       const status = document.getElementById('status');
-      if (!name) { status.textContent = 'Please enter your name.'; return; }
-      status.textContent = 'Submitting...';
-      setTimeout(()=>{ status.textContent = 'Thanks, ' + name + '! Your message was received (demo).'; }, 700);
+      const first = document.getElementById('firstName').value.trim();
+      const last = document.getElementById('lastName').value.trim();
+      const gender = document.getElementById('gender').value;
+      const dob = document.getElementById('dob').value;
+      const college = document.getElementById('collegeName').value.trim();
+      const degreeType = document.getElementById('degreeType').value;
+      const stream = document.getElementById('stream').value;
+  const completion = document.getElementById('yearOfCompletion').value;
+  const collegeLocation = document.getElementById('collegeLocation') ? document.getElementById('collegeLocation').value.trim() : '';
+  const countryCode = document.getElementById('countryCode').value;
+  const phone = document.getElementById('phone').value.trim();
+
+      // Format phone with country code if provided
+      const fullPhone = phone ? `${countryCode} ${phone}` : '';
+
+      if (!first) { status.textContent = 'Please enter your first name.'; return; }
+      if (!last) { status.textContent = 'Please enter your last name.'; return; }
+      if (!gender) { status.textContent = 'Please select your gender.'; return; }
+      if (!dob) { status.textContent = 'Please enter your date of birth.'; return; }
+      if (!college) { status.textContent = 'Please enter your college name.'; return; }
+  if (!degreeType) { status.textContent = 'Please select your degree type.'; return; }
+  if (!stream) { status.textContent = 'Please select your stream.'; return; }
+  if (!completion) { status.textContent = 'Please select your year of completion.'; return; }
+  if (!collegeLocation) { status.textContent = 'Please enter the college location.'; return; }
+  status.textContent = 'Submitting...';
+      setTimeout(()=>{ status.textContent = 'Thanks, ' + first + ' ' + last + '! Your form was received (demo).'; }, 700);
     });
   </script>
 </body>
