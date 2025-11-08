@@ -57,6 +57,12 @@
     const form = document.getElementById('loginForm');
     const msg = document.getElementById('message');
 
+    // If already logged in, go to homepage
+    if (localStorage.getItem('loggedIn') === 'true') {
+      // already authenticated — land on home by default
+      window.location.href = 'homepage.html';
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       msg.textContent = '';
@@ -84,12 +90,16 @@
       msg.className = '';
 
       setTimeout(() => {
-        if ((username === 'admin' || username === 'testing') && (password === 'password'|| password === 'testingPassword')) {
+        if ((username === 'admin' || username === 'testing') && (password === 'password' || password === 'testingPassword')) {
           msg.textContent = 'Login successful.';
           msg.className = 'success';
+          // Persist simple auth state (demo only)
+          localStorage.setItem('loggedIn', 'true');
+          localStorage.setItem('username', username);
           setTimeout(() => {
-            window.location.href = 'page1.html';
-          }, 800);
+            // default landing is homepage
+            window.location.href = 'homepage.html';
+          }, 600);
         } else {
           msg.textContent = 'Invalid user name or password.';
           msg.className = 'error';

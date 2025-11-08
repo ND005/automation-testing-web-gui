@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Home - Demo App</title>
+  <title>Form - Demo App</title>
   <style>
     :root{--bg:#f8fafc;--card:#fff;--accent:#2563eb;--muted:#6b7280}
     *{box-sizing:border-box}
@@ -17,6 +17,8 @@
     button#logoutBtn{background:#ef4444;color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer}
     main{padding:28px}
     .card{background:var(--card);padding:20px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.06)}
+    .field{margin-bottom:12px}
+    input,textarea{width:100%;padding:10px;border:1px solid #e6e9ef;border-radius:8px}
   </style>
 </head>
 <body>
@@ -35,35 +37,55 @@
 
   <main class="container">
     <section class="card">
-      <h1>Welcome to the Home page</h1>
-      <p id="welcome">This is the default page after a successful login.</p>
+      <h1>Sample Form</h1>
+      <p>Fill and submit this simple demo form.</p>
+      <form id="demoForm">
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" required />
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="messageField" name="message" rows="4"></textarea>
+        </div>
+        <div class="field">
+          <button type="submit" id="submitBtn">Send</button>
+        </div>
+        <div id="status" style="margin-top:10px;color:var(--muted)"></div>
+      </form>
     </section>
   </main>
 
   <script>
-    // Simple auth guard: redirect to login if not authenticated
     if (localStorage.getItem('loggedIn') !== 'true') {
       window.location.href = 'index.html';
     }
-
-    // show username
-    const username = localStorage.getItem('username') || 'User';
-    document.getElementById('who').textContent = username;
-
-    // highlight active nav link
+    document.getElementById('who').textContent = localStorage.getItem('username') || 'User';
     function setActive(){
       const href = location.href;
       document.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
-      if (href.includes('homepage.html') || href.endsWith('/')) document.getElementById('nav-home').classList.add('active');
+      if (href.includes('homepage.html')) document.getElementById('nav-home').classList.remove('active');
       if (href.includes('form.html')) document.getElementById('nav-form').classList.add('active');
-      if (href.includes('about.html')) document.getElementById('nav-about').classList.add('active');
+      if (href.includes('about.html')) document.getElementById('nav-about').classList.remove('active');
+      // more robust highlight handled below
+      document.querySelectorAll('.nav-link').forEach(a => {
+        if (location.href.includes(a.getAttribute('href'))) a.classList.add('active');
+      });
     }
     setActive();
-
     document.getElementById('logoutBtn').addEventListener('click', function(){
       localStorage.removeItem('loggedIn');
       localStorage.removeItem('username');
       window.location.href = 'index.html';
+    });
+
+    document.getElementById('demoForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const status = document.getElementById('status');
+      if (!name) { status.textContent = 'Please enter your name.'; return; }
+      status.textContent = 'Submitting...';
+      setTimeout(()=>{ status.textContent = 'Thanks, ' + name + '! Your message was received (demo).'; }, 700);
     });
   </script>
 </body>

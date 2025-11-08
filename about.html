@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Home - Demo App</title>
+  <title>About - Demo App</title>
   <style>
     :root{--bg:#f8fafc;--card:#fff;--accent:#2563eb;--muted:#6b7280}
     *{box-sizing:border-box}
@@ -35,31 +35,20 @@
 
   <main class="container">
     <section class="card">
-      <h1>Welcome to the Home page</h1>
-      <p id="welcome">This is the default page after a successful login.</p>
+      <h1>About this demo</h1>
+      <p>This small demo demonstrates a client-side login flow and navigation across three pages: Home, Form, and About. It's client-only and stores a simple "loggedIn" flag in localStorage for demo purposes.</p>
+      <p>To change behavior in a real app, replace the demo login with server-side authentication and secure session handling.</p>
     </section>
   </main>
 
   <script>
-    // Simple auth guard: redirect to login if not authenticated
     if (localStorage.getItem('loggedIn') !== 'true') {
       window.location.href = 'index.html';
     }
-
-    // show username
-    const username = localStorage.getItem('username') || 'User';
-    document.getElementById('who').textContent = username;
-
-    // highlight active nav link
-    function setActive(){
-      const href = location.href;
-      document.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
-      if (href.includes('homepage.html') || href.endsWith('/')) document.getElementById('nav-home').classList.add('active');
-      if (href.includes('form.html')) document.getElementById('nav-form').classList.add('active');
-      if (href.includes('about.html')) document.getElementById('nav-about').classList.add('active');
-    }
-    setActive();
-
+    document.getElementById('who').textContent = localStorage.getItem('username') || 'User';
+    document.querySelectorAll('.nav-link').forEach(a => {
+      if (location.href.includes(a.getAttribute('href'))) a.classList.add('active');
+    });
     document.getElementById('logoutBtn').addEventListener('click', function(){
       localStorage.removeItem('loggedIn');
       localStorage.removeItem('username');
