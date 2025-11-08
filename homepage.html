@@ -1,70 +1,218 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Home - Demo App</title>
-  <style>
-    :root{--bg:#f8fafc;--card:#fff;--accent:#2563eb;--muted:#6b7280}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;background:var(--bg);color:#0f172a}
-    header{background:#fff;border-bottom:1px solid #e6edf8}
-    .container{max-width:980px;margin:0 auto;padding:18px}
-    .nav{display:flex;gap:12px;align-items:center}
-    .nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:8px}
-    .nav a.active{background:rgba(37,99,235,0.08);color:var(--accent);font-weight:600}
-    .spacer{flex:1}
-    button#logoutBtn{background:#ef4444;color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer}
-    main{padding:28px}
-    .card{background:var(--card);padding:20px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.06)}
-  </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Home - Demo App</title>
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --card: #fff;
+            --accent: #2563eb;
+            --muted: #6b7280
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+            background: var(--bg);
+            color: #0f172a
+        }
+
+        header {
+            background: #fff;
+            border-bottom: 1px solid #e6edf8
+        }
+
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 18px
+        }
+
+        .nav {
+            display: flex;
+            gap: 12px;
+            align-items: center
+        }
+
+        .nav a {
+            color: var(--muted);
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 8px
+        }
+
+        .nav a.active {
+            background: rgba(37, 99, 235, 0.08);
+            color: var(--accent);
+            font-weight: 600
+        }
+
+        .spacer {
+            flex: 1
+        }
+
+        button#logoutBtn {
+            background: #ef4444;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer
+        }
+
+        main {
+            padding: 28px
+        }
+
+        .card {
+            background: var(--card);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(2, 6, 23, 0.06)
+        }
+    </style>
 </head>
+
 <body>
-  <header>
-    <div class="container nav">
-      <a id="nav-home" class="nav-link" href="homepage.html">Home</a>
-      <a id="nav-form" class="nav-link" href="form.html">Form</a>
-      <a id="nav-about" class="nav-link" href="about.html">About</a>
-      <div class="spacer"></div>
-      <div style="display:flex;gap:12px;align-items:center">
-        <div id="who" style="color:var(--muted);font-size:14px"></div>
-        <button id="logoutBtn">Logout</button>
-      </div>
-    </div>
-  </header>
+    <header>
+        <div class="container nav">
+            <a id="nav-home" class="nav-link" href="homepage.html">Home</a>
+            <a id="nav-form" class="nav-link" href="form.html">Form</a>
+            <a id="nav-about" class="nav-link" href="about.html">About</a>
+            <div class="spacer"></div>
+            <div style="display:flex;gap:12px;align-items:center">
+                <div id="who" style="color:var(--muted);font-size:14px"></div>
+                <button id="logoutBtn">Logout</button>
+            </div>
+        </div>
+    </header>
 
-  <main class="container">
-    <section class="card">
-      <h1>Welcome to the Home page</h1>
-      <p id="welcome">This is the default page after a successful login.</p>
-    </section>
-  </main>
+    <main class="container">
 
-  <script>
-    // Simple auth guard: redirect to login if not authenticated
-    if (localStorage.getItem('loggedIn') !== 'true') {
-      window.location.href = 'index.html';
-    }
+        <!-- Portfolio section added from resume headers -->
+        <section class="card" style="margin-top:18px">
+            <div style="text-align:center;">
+                <h2>Nimmala Dinesh</h2>
+            </div>
 
-    // show username
-    const username = localStorage.getItem('username') || 'User';
-    document.getElementById('who').textContent = username;
+            <div style="margin-top:14px">
+                <h3>SUMMARY</h3>
+                <p id="pf-summary">Highly skilled and detail-oriented Software Development Engineer in Test (SDET) with
+                    4+ years of experience
+                    in Quality (QE & QA) specializing in automation for Web, API, Mobile and Cloud-based applications.
+                    Expertise in Core Java, BDD (Cucumber, TestNG, JUnit), Selenium, Rest Assured, Appium and modern
+                    frameworks. Strong knowledge of CI/CD, AWS deployments and containerization testing. Proficient in
+                    collaborating across teams to drive quality at all stages of the SDLC</p>
 
-    // highlight active nav link
-    function setActive(){
-      const href = location.href;
-      document.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
-      if (href.includes('homepage.html') || href.endsWith('/')) document.getElementById('nav-home').classList.add('active');
-      if (href.includes('form.html')) document.getElementById('nav-form').classList.add('active');
-      if (href.includes('about.html')) document.getElementById('nav-about').classList.add('active');
-    }
-    setActive();
+                <h3>PROFESSIONAL EXPERIENCE</h3>
+                <div id="pf-experience-1">
+                    <p><a href="https://www.verizon.com/about">Verizon| SDET -2 | OCT-2023 -
+                            Present </a></p>
+                    <ul>
+                        <li>Designed and implemented comprehensive automation suites for front-end and back-end quality
+                            engineering activities, including unit, integration, system and regression testing using
+                            <strong>Selenium, Rest Assured </strong> with frameworks like <strong>Cucumber BDD and
+                                TestNG.</strong>
+                        </li>
+                        <li> Configured automation frameworks with Maven and performed microservices testing by
+                            validating <strong>REST/Graph QL APIs</strong> and ensuring reliable service interactions in
+                            CI/CD pipeline.
+                        </li>
+                        <li>Actively assessed and incorporated modern testing tools, including the effective utilization
+                            of <strong>Gen AI tools</strong> like Copilot and Google Gemini, to optimize workflows and
+                            improve testing accuracy across
+                            projects.
+                        </li>
+                        <li>Engaged with database administrators, business analysts and developers to translate complex
+                            system specifications related to <strong>API, UI, non-functional, functional and integration
+                                testing</strong>. As a part of Cross-Functional Collaboration with software out sourcing
+                            teams and juniors in the process of overseeing or mentoring for domain level.
+                        </li>
+                        <li>Developed and managed Jenkins freestyle pipelines, including triggering jobs via Jenkins
+                            extension files and adeptly performed root cause analysis for builds & test failures in
+                            different environments,
+                            operating system like <strong>LINUX and Windows </strong>which Integrated with
+                            <strong>Grafana dashboards</strong> for
+                            real-time monitoring of test metrics and system performance, enhancing visibility into
+                            application health.
+                        </li>
+                    </ul>
+                </div>
+                <div id="pf-experience-2">
+                    <p><a href="https://www.amd.com/en.html">AMD | SOW | SEPT-2021 - OCT-2023</a></p>
+                    <ul>
+                        <li>Automated the AMD Adrenalin GPU control panel using Ranorex, leveraging custom packages and
+                            DLL files to enhance test coverage.</li>
+                        <li>Worked in understanding way of testing lifecycle, QA process & terminology on graphic
+                            devices, drivers and multimedia of silicon’s industries in different configurational setups.
+                        </li>
+                        <li>Automated the collection of application usage data using a C# .NET library and data
+                            validation tools to enhance feature quality and innovation. </li>
+                    </ul>
+                </div>
 
-    document.getElementById('logoutBtn').addEventListener('click', function(){
-      localStorage.removeItem('loggedIn');
-      localStorage.removeItem('username');
-      window.location.href = 'index.html';
-    });
-  </script>
+                <h3>SKILLS</h3>
+                <div id="skills">
+                    <ul>
+                        <li><strong>Automation</strong> : Selenium, Playwright, Appium, Rest Assured</li>
+                        <li><strong>Programing languages</strong> : Core Java, C# & SQL</li>
+                        <li><strong>Frameworks</strong> : Cucumber BDD, TestNG, Serenity BDD, Data Driven & .Net
+                            exposure</li>
+                        <li><strong>Tools</strong> : Jenkins, Grafana, Postman, Postgres, Eclipes, Jira with Confluence,
+                            Gitlab & Visual studio</li>
+                    </ul>
+                </div>
+                <h3>EDUCATION</h3>
+                <p id="pf-education">KG Reddy College of Engineering and Technology — B.Tech — 2020.</p>
+
+                <h3>CERTIFICATIONS</h3>
+                <p id="pf-certs"><strong>ISTQB Foundation Level</strong> Certified Tester.</p>
+
+                <h3>CONTACT</h3>
+                <p id="pf-contact">Email: <a href="nimmaladinesh5@gmail.com">nimmaladinesh5@gmail.com</a> — LinkedIn: <a
+                        href="www.linkedin.com/in/dinesh-nimmala-49635518a">linkedin</a>
+                </p>
+
+                <p style="margin-top:12px;font-size:14px;color:#374151">Resume (update on 8/Nov/2025): <a
+                        href="Dinesh_Nimmala_SDET.pdf" target="_blank" rel="noopener">Dinesh_Nimmala_SDET.pdf</a>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Simple auth guard: redirect to login if not authenticated
+        if (localStorage.getItem('loggedIn') !== 'true') {
+            window.location.href = 'index.html';
+        }
+
+        // show username
+        const username = localStorage.getItem('username') || 'User';
+        document.getElementById('who').textContent = username;
+
+        // highlight active nav link
+        function setActive() {
+            const href = location.href;
+            document.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
+            if (href.includes('homepage.html') || href.endsWith('/')) document.getElementById('nav-home').classList.add('active');
+            if (href.includes('form.html')) document.getElementById('nav-form').classList.add('active');
+            if (href.includes('about.html')) document.getElementById('nav-about').classList.add('active');
+        }
+        setActive();
+
+        document.getElementById('logoutBtn').addEventListener('click', function () {
+            localStorage.removeItem('loggedIn');
+            localStorage.removeItem('username');
+            window.location.href = 'index.html';
+        });
+    </script>
 </body>
+
 </html>
