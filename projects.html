@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" type="image/png" href="Nicon.png" />
+  <title>Projects - Demo App</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #fff;
+      --accent: #2563eb;
+      --muted: #6b7280
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+      background: var(--bg);
+      color: #0f172a
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid #e6edf8
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 18px
+    }
+
+    .nav {
+      display: flex;
+      gap: 12px;
+      align-items: center
+    }
+
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 8px
+    }
+
+    .nav a.active {
+      background: rgba(37, 99, 235, 0.08);
+      color: var(--accent);
+      font-weight: 600
+    }
+
+    .spacer {
+      flex: 1
+    }
+
+    button#logoutBtn {
+      background: #ef4444;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer
+    }
+
+    main {
+      padding: 28px
+    }
+
+    .card {
+      background: var(--card);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(2, 6, 23, 0.06)
+    }
+
+    @media (max-width:600px) {
+      .container {
+        padding: 12px
+      }
+
+      main {
+        padding: 12px
+      }
+
+      .card {
+        padding: 14px
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container nav">
+      <a id="nav-home" class="nav-link" href="homepage.html">Home</a>
+      <a id="nav-projects" class="nav-link" href="projects.html">Projects</a>
+      <a id="nav-form" class="nav-link" href="form.html">Form</a>
+      <a id="nav-about" class="nav-link" href="about.html">About</a>
+      <div class="spacer"></div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <div id="who" style="color:var(--muted);font-size:14px"></div>
+        <button id="logoutBtn">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h1>Projects</h1>
+      <p>I have been worked on multiple Automation projects & Testing sets with suits</p>
+      <ul>
+        <li><strong>Web-UI Automation</strong> — A small end-to-end tests for form submission and navigation using
+          <strong>Selenium Web Driver & Cucumber BDD</strong>.</li>
+        <li><strong>API - Data-driven Testing</strong> — sample scripts to run automated inputs and validations to test
+          API schema based on pre define architecture. using <strong>Rest Assured & TestNG</strong></li>
+        <li><strong>LLM models data feeding</strong> — examples of training LLM models developed by verizon in colabration with Vegas & Google.</li>
+      </ul>
+      <p style="margin-top:12px;color:var(--muted)">This page is a placeholder — replace with your actual project
+        descriptions or links to repositories.</p>
+    </section>
+  </main>
+
+  <script>
+    // Basic auth guard — same behavior as other pages
+    if (localStorage.getItem('loggedIn') !== 'true') {
+      window.location.href = 'index.html';
+    }
+    document.getElementById('who').textContent = localStorage.getItem('username') || 'User';
+    document.querySelectorAll('.nav-link').forEach(a => {
+      if (location.href.includes(a.getAttribute('href'))) a.classList.add('active');
+    });
+    document.getElementById('logoutBtn').addEventListener('click', function () {
+      localStorage.removeItem('loggedIn');
+      localStorage.removeItem('username');
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+
+</html>
