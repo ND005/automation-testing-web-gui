@@ -78,6 +78,21 @@
       border-radius: 12px;
       box-shadow: 0 6px 18px rgba(2, 6, 23, 0.06)
     }
+    /* Responsive adjustments for small screens */
+    @media (max-width: 600px) {
+      .container { padding: 12px }
+      main { padding: 12px }
+      .card { padding: 14px; border-radius: 10px }
+      .card h1 { font-size: 18px; margin-bottom: 8px }
+      .card h3 { font-size: 16px }
+      pre { font-size: 13px; overflow-x: auto; white-space: pre-wrap; word-break: break-word }
+      .social-links { gap: 12px; flex-wrap: wrap; justify-content: center }
+      .social-links a { flex: 0 0 auto }
+      .social-links a div { gap: 6px }
+      .social-links svg { width: 28px; height: 28px }
+      .nav { flex-wrap: wrap; gap: 8px }
+      .nav a { padding: 6px 8px; font-size: 14px }
+    }
   </style>
 </head>
 
